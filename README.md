@@ -2,15 +2,7 @@
 
 A production-grade chat application that integrates Google's Gemini API with automatic key failover, intelligent response caching, and persistent SQLite history. Designed for resilience, cost efficiency, and transparent per-request metadata.
 
-## 1. Live URLs
-
-- **Frontend:** [https://lyftr-frontend.vercel.app](https://lyftr-frontend.vercel.app)
-- **Backend:** [https://lyftr-backend.fly.dev](https://lyftr-backend.fly.dev)
-- **Health Check:** [https://lyftr-backend.fly.dev/health](https://lyftr-backend.fly.dev/health)
-
----
-
-## 2. Run Locally
+## 1.  Run Locally
 
 ### With Docker (recommended)
 
@@ -73,7 +65,7 @@ The frontend will be available at http://localhost:3000.
 
 ---
 
-## 3. Design Decisions
+## 2. Design Decisions
 
 ### Key Failover & Resilience
 
@@ -128,7 +120,7 @@ FastAPI Backend
 
 ---
 
-## 4. Verification
+## 3. Verification
 
 ### Cache Hits & Per-Request Tokens
 
@@ -219,7 +211,7 @@ curl -s "http://localhost:8000/health" | jq .
 
 ---
 
-## 5. Setup Used
+## 4. Setup Used
 
 ### Editor & Environment
 - **Editor:** VS Code
@@ -237,34 +229,6 @@ curl -s "http://localhost:8000/health" | jq .
 
 ### AI Tools Used
 - Claude (Kiro) for code generation, architecture design, and troubleshooting
-
----
-
-## 6. Bonus Features
-
-### Session-Scoped System Prompts
-The frontend includes an optional collapsible "System Prompt" panel that allows users to set custom instructions for the current session. The prompt is sent with every message and persists until reset. This is optional but useful for steering the bot's behavior without modifying the code.
-
-### Structured Logging
-Backend logs include request ID, session ID, source (LIVE_INFERENCE / LLM_CACHE), key ID, fallback count, latency, tokens, and outcome. Logs are structured and do not expose message content or API keys.
-
-### Auto-Scaling Compose Setup
-The `docker-compose.yml` includes health checks for both services, automatic restart policies, and dependency ordering. The frontend waits for the backend health check before starting.
-
-### Mobile & Accessibility
-The frontend is fully responsive and includes:
-- Keyboard navigation (Enter to send, Shift+Enter for newline)
-- Semantic HTML with landmarks and labels
-- Focus management
-- Reduced motion support
-- ARIA attributes for screen readers
-
-### Input Validation & Error Handling
-Both frontend and backend validate inputs strictly:
-- Messages: 1–4000 chars after trimming
-- System prompt: ≤4000 chars
-- Malformed JSON returns HTTP 422
-- All errors are JSON with a `detail` field; no stack traces exposed
 
 ---
 
